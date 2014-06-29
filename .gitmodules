@@ -1,0 +1,12 @@
+[submodule "cookbooks/powershell"]
+	path = cookbooks/powershell
+	url = git://github.com/chef-windows/powershell.git
+[submodule "cookbooks/chocolatey"]
+	path = cookbooks/chocolatey
+	url = git://github.com/chocolatey/chocolatey-cookbook.git
+[submodule "cookbooks/windows"]
+	path = cookbooks/windows
+	url = git://github.com/opscode-cookbooks/windows.git
+[submodule "cookbooks/ms_dotnet45"]
+	path = cookbooks/ms_dotnet45
+	url = git://github.com/Webtrends/ms_dotnet45.git
