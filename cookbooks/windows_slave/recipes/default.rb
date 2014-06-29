@@ -18,6 +18,11 @@ end
   chocolatey pack
 end
 
+# Extra packages
+node['windows_slave']['extra_pakages'].each do |pack|
+  chocolatey pack
+end
+
 windows_package 'opencover' do
   source node['windows_slave']['opencover']
   action :install
