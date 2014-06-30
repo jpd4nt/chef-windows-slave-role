@@ -10,3 +10,6 @@
 [submodule "cookbooks/ms_dotnet45"]
 	path = cookbooks/ms_dotnet45
 	url = git://github.com/Webtrends/ms_dotnet45.git
+[submodule "cookbooks/hostsfile"]
+	path = cookbooks/hostsfile
+	url = git://github.com/customink-webops/hostsfile.git
