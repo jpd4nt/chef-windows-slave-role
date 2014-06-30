@@ -14,7 +14,7 @@ include_recipe 'powershell::powershell5'
 end
 
 # C# build tools
-%w{ specflow XUnit stylecop PhantomJS }.each do |pack|
+%w{ specflow XUnit stylecop PhantomJS javaruntime Sonar-runner  }.each do |pack|
   chocolatey pack
 end
 
@@ -36,8 +36,20 @@ end
 
 if !node['windows_slave']['Teamcity']['enable']
   # CI Stuff
-  %w{ javaruntime Sonar-runner maven apache.ant }.each do |pack|
+  %w{ maven apache.ant Wget }.each do |pack|
     chocolatey pack
+  end
+  hostsfile_entry node['windows_slave']['jenkins']['master_ip'] do
+    hostname  'ci.ntstaging.org'
+    unique    true
+    action    :create_if_missing
+  end
+  template "C:\slave-startup.py" do
+    source "jenkins.erb"
+    variables(
+      :user => node['windows_slave']['jenkins']['username'],
+      :pass => node['windows_slave']['jenkins']['password']
+    )
   end
 else
   chocolatey javaruntime
