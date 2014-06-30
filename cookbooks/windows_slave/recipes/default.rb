@@ -36,7 +36,7 @@ end
 
 if !node['windows_slave']['Teamcity']['enable']
   # CI Stuff
-  %w{ maven apache.ant Wget }.each do |pack|
+  %w{ maven apache.ant Wget python2 }.each do |pack|
     chocolatey pack
   end
   hostsfile_entry node['windows_slave']['jenkins']['master_ip'] do
