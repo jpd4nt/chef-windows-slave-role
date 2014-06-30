@@ -44,11 +44,13 @@ if !node['windows_slave']['Teamcity']['enable']
     unique    true
     action    :create_if_missing
   end
-  template "C:\slave-startup.py" do
+  template "c:/slave-startup.py" do
     source "jenkins.erb"
     variables(
       :user => node['windows_slave']['jenkins']['username'],
-      :pass => node['windows_slave']['jenkins']['password']
+      :pass => node['windows_slave']['jenkins']['password'],
+      :java => node['windows_slave']['jre'],
+      :wget => node['windows_slave']['wget']
     )
   end
 else
