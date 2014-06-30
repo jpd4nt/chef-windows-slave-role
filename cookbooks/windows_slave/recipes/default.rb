@@ -9,7 +9,7 @@
 include_recipe 'powershell::powershell5'
 
 # C# build stuff
-%w{ VisualStudio2013ExpressWeb webdeploy git.commandline  }.each do |pack|
+%w{ VisualStudio2013ExpressWeb webdeploy git git.commandline  }.each do |pack|
   chocolatey pack
 end
 
