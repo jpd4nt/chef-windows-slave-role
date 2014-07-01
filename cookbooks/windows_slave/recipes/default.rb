@@ -26,6 +26,7 @@ end
 windows_package 'opencover' do
   source node['windows_slave']['opencover']
   action :install
+  not_if {::File.exists?('c:/Windows/SysWOW64/config/systemprofile/AppData/Local/Apps/OpenCover/OpenCover.Console')}
 end
 
 windows_zipfile 'c:/pickles' do
