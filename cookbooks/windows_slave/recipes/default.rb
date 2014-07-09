@@ -11,16 +11,25 @@ include_recipe 'powershell::powershell5'
 # C# build stuff
 %w{ VisualStudio2013ExpressWeb webdeploy git git.commandline  }.each do |pack|
   chocolatey pack
+  execute "install_#{pack}" do
+    command "choco install #{pack}"
+  end
 end
 
 # C# build tools
 %w{ specflow XUnit stylecop fxcop PhantomJS javaruntime Sonar-runner  }.each do |pack|
   chocolatey pack
+  execute "install_#{pack}" do
+    command "choco install #{pack}"
+  end
 end
 
 # Extra packages
 node['windows_slave']['extra_pakages'].each do |pack|
   chocolatey pack
+  execute "install_#{pack}" do
+    command "choco install #{pack}"
+  end
 end
 
 windows_package 'opencover' do
@@ -33,6 +42,12 @@ windows_zipfile 'c:/pickles' do
   source node['windows_slave']['pickles']
   action :unzip
   not_if {::File.exists?('c:/pickles')}
+end
+
+windows_zipfile 'c:/Sonarqube' do
+  source "http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/#{node['windows_slave']['sonar_version']}/sonar-runner-dist-#{node['windows_slave']['sonar_version']}.zip" 
+  action :unzip
+  not_if {::File.exists?("c:/Sonarqube/sonar-runner-#{node['windows_slave']['sonar_version']}")}
 end
 
 if !node['windows_slave']['Teamcity']['enable']

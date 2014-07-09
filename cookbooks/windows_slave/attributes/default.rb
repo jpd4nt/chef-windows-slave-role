@@ -18,3 +18,4 @@ default['windows_slave']['opencover'] = 'https://github.com/OpenCover/opencover/
 default['windows_slave']['jenkins']['master_ip'] = '10.210.194.249'
 default['windows_slave']['jenkins']['username'] = 'changeme'
 default['windows_slave']['jenkins']['password'] = 'changeme'
+default['windows_slave']['sonar_version'] = '2.4'
