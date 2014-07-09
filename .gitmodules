@@ -13,3 +13,6 @@
 [submodule "cookbooks/hostsfile"]
 	path = cookbooks/hostsfile
 	url = git://github.com/customink-webops/hostsfile.git
+[submodule "cookbooks/iis"]
+	path = cookbooks/iis
+	url = git://github.com/opscode-cookbooks/iis.git
