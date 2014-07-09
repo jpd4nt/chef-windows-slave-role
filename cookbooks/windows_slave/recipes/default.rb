@@ -14,7 +14,7 @@ include_recipe 'powershell::powershell5'
 end
 
 # C# build tools
-%w{ specflow XUnit stylecop PhantomJS javaruntime Sonar-runner  }.each do |pack|
+%w{ specflow XUnit stylecop fxcop PhantomJS javaruntime Sonar-runner  }.each do |pack|
   chocolatey pack
 end
 
