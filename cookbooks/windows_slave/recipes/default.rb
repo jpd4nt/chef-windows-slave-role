@@ -35,20 +35,20 @@ end
 windows_package 'opencover' do
   source node['windows_slave']['opencover']
   action :install
-  not_if {::File.exists?('c:/Windows/SysWOW64/config/systemprofile/AppData/Local/Apps/OpenCover/OpenCover.Console')}
+  not_if {::File.exists?("#{ENV['localappdata']}/Apps/OpenCover/OpenCover.Console.exe")}
 end
 execute "register_opencover_x86" do
-  cwd '%localappdata%\apps\opencover'
-  command "regsvr32 x86\OpenCover.Profiler.dll /s"
+  cwd "#{ENV['localappdata']}/Apps/OpenCover"
+  command "regsvr32 x86/OpenCover.Profiler.dll /s"
 end
 execute "register_opencover_x64" do
-  cwd '%localappdata%\apps\opencover'
-  command "regsvr32 x64\OpenCover.Profiler.dll /s"
+  cwd "#{ENV['localappdata']}/Apps/OpenCover"
+  command "regsvr32 x64/OpenCover.Profiler.dll /s"
 end
 
 cookbook_file "FxCopCmd.exe.config" do
   path "C:/Program Files (x86)/Microsoft Fxcop 10.0/FxCopCmd.exe.config"
-  action :action
+  action :create
 end
 
 windows_zipfile 'c:/pickles' do
@@ -67,6 +67,9 @@ if !node['windows_slave']['Teamcity']['enable']
   # CI Stuff
   %w{ maven apache.ant Wget python2 }.each do |pack|
     chocolatey pack
+    execute "install_#{pack}" do
+      command "choco install #{pack}"
+    end
   end
   hostsfile_entry node['windows_slave']['jenkins']['master_ip'] do
     hostname  'ci.ntstaging.org'
@@ -81,6 +84,13 @@ if !node['windows_slave']['Teamcity']['enable']
       :java => node['windows_slave']['jre'],
       :wget => node['windows_slave']['wget']
     )
+  end
+  cookbook_file "JenkinsSpotSlave.xml" do
+    path "C:/JenkinsSpotSlave.xml"
+    action :create
+  end
+  execute "slave_task" do
+    command "schtasks /Create /TN \"Jenkins Spot Slave\" /RU SYSTEM /F /xml C:/JenkinsSpotSlave.xml"
   end
 else
   chocolatey javaruntime

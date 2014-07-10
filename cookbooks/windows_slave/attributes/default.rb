@@ -9,7 +9,7 @@
 
 default['windows_slave']['extra_pakages'] = {}
 default['windows_slave']['jre'] = "C:\\\\Program Files\\\\Java\\\\jre7\\\\bin\\\\java"
-default['windows_slave']['wget'] = "C:\\\\Chocolatey\\\\bin\\\\wget"
+default['windows_slave']['wget'] = "wget"
 default['windows_slave']['Teamcity']['enable'] = false
 default['windows_slave']['Teamcity']['serverurl'] = 'http://localhost:8111'
 default['windows_slave']['Teamcity']['local_path'] = 'Z:\\TeamCity'
