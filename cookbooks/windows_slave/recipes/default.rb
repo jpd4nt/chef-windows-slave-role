@@ -37,6 +37,19 @@ windows_package 'opencover' do
   action :install
   not_if {::File.exists?('c:/Windows/SysWOW64/config/systemprofile/AppData/Local/Apps/OpenCover/OpenCover.Console')}
 end
+execute "register_opencover_x86" do
+  cwd '%localappdata%\apps\opencover'
+  command "regsvr32 x86\OpenCover.Profiler.dll /s"
+end
+execute "register_opencover_x64" do
+  cwd '%localappdata%\apps\opencover'
+  command "regsvr32 x64\OpenCover.Profiler.dll /s"
+end
+
+cookbook_file "FxCopCmd.exe.config" do
+  path "C:/Program Files (x86)/Microsoft Fxcop 10.0/FxCopCmd.exe.config"
+  action :action
+end
 
 windows_zipfile 'c:/pickles' do
   source node['windows_slave']['pickles']
