@@ -63,6 +63,12 @@ windows_zipfile 'c:/Sonarqube' do
   not_if {::File.exists?("c:/Sonarqube/sonar-runner-#{node['windows_slave']['sonar_version']}")}
 end
 
+windows_zipfile 'c:/reshaper' do
+  source node['windows_slave']['reshaper']
+  action :unzip
+  not_if {::File.exists?('c:/reshaper')}
+end
+
 if !node['windows_slave']['Teamcity']['enable']
   # CI Stuff
   %w{ maven apache.ant Wget python2 }.each do |pack|
