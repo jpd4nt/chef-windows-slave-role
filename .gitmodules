@@ -22,3 +22,6 @@
 [submodule "cookbooks/scalr"]
 	path = cookbooks/scalr
 	url = git://github.com/scalr-tutorials/scalr-cookbook.git
+[submodule "cookbooks/seven_zip"]
+	path = cookbooks/seven_zip
+	url = git://github.com/daptiv/seven_zip.git
