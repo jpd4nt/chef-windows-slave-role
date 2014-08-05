@@ -16,3 +16,9 @@
 [submodule "cookbooks/iis"]
 	path = cookbooks/iis
 	url = git://github.com/opscode-cookbooks/iis.git
+[submodule "cookbooks/visualstudio"]
+	path = cookbooks/visualstudio
+	url = git://github.com/daptiv/visualstudio.git
+[submodule "cookbooks/scalr"]
+	path = cookbooks/scalr
+	url = git://github.com/scalr-tutorials/scalr-cookbook.git
