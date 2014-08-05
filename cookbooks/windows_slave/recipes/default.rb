@@ -9,7 +9,7 @@
 include_recipe 'powershell::powershell5'
 
 # C# build stuff
-%w{ VisualStudio2013ExpressWeb webdeploy git git.commandline  }.each do |pack|
+%w{ VisualStudio2013Professional VS2013.2 webdeploy git git.commandline  }.each do |pack|
   chocolatey pack
   execute "install_#{pack}" do
     command "choco install #{pack}"
@@ -17,7 +17,7 @@ include_recipe 'powershell::powershell5'
 end
 
 # C# build tools
-%w{ specflow XUnit stylecop fxcop PhantomJS javaruntime Sonar-runner  }.each do |pack|
+%w{ specflow XUnit stylecop PhantomJS javaruntime Sonar-runner  }.each do |pack|
   chocolatey pack
   execute "install_#{pack}" do
     command "choco install #{pack}"
