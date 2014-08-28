@@ -12,7 +12,7 @@ include_recipe 'powershell::powershell5'
 %w{ VisualStudio2013Professional VS2013.2 webdeploy git git.commandline  }.each do |pack|
   chocolatey pack
   execute "install_#{pack}" do
-    command "choco install #{pack}"
+    command "#{node['windows_slave']['choco_path']}/choco install #{pack}"
   end
 end
 
@@ -20,7 +20,7 @@ end
 %w{ specflow XUnit stylecop PhantomJS javaruntime Sonar-runner  }.each do |pack|
   chocolatey pack
   execute "install_#{pack}" do
-    command "choco install #{pack}"
+    command "#{node['windows_slave']['choco_path']}/choco install #{pack}"
   end
 end
 
@@ -28,7 +28,7 @@ end
 node['windows_slave']['extra_pakages'].each do |pack|
   chocolatey pack
   execute "install_#{pack}" do
-    command "choco install #{pack}"
+    command "#{node['windows_slave']['choco_path']}/choco install #{pack}"
   end
 end
 
@@ -74,7 +74,7 @@ if !node['windows_slave']['Teamcity']['enable']
   %w{ maven apache.ant Wget python2 }.each do |pack|
     chocolatey pack
     execute "install_#{pack}" do
-      command "choco install #{pack}"
+      command "#{node['windows_slave']['choco_path']}/choco install #{pack}"
     end
   end
   hostsfile_entry node['windows_slave']['jenkins']['master_ip'] do
