@@ -46,10 +46,10 @@ execute "register_opencover_x64" do
   command "regsvr32 x64/OpenCover.Profiler.dll /s"
 end
 
-cookbook_file "FxCopCmd.exe.config" do
-  path "C:/Program Files (x86)/Microsoft Fxcop 10.0/FxCopCmd.exe.config"
-  action :create
-end
+#cookbook_file "FxCopCmd.exe.config" do
+#  path "C:/Program Files (x86)/Microsoft Fxcop 10.0/FxCopCmd.exe.config"
+#  action :create
+#end
 
 windows_zipfile 'c:/pickles' do
   source node['windows_slave']['pickles']
@@ -63,10 +63,10 @@ windows_zipfile 'c:/Sonarqube' do
   not_if {::File.exists?("c:/Sonarqube/sonar-runner-#{node['windows_slave']['sonar_version']}")}
 end
 
-windows_zipfile 'c:/reshaper' do
-  source node['windows_slave']['reshaper']
+windows_zipfile 'c:/resharper' do
+  source node['windows_slave']['resharper']
   action :unzip
-  not_if {::File.exists?('c:/reshaper')}
+  not_if {::File.exists?('c:/resharper')}
 end
 
 if !node['windows_slave']['Teamcity']['enable']
