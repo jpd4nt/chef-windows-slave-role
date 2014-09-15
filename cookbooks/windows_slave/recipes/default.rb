@@ -17,7 +17,15 @@ include_recipe 'powershell::powershell5'
 end
 
 # C# build tools
-%w{ specflow XUnit stylecop PhantomJS javaruntime Sonar-runner  }.each do |pack|
+%w{ specflow XUnit stylecop PhantomJS javaruntime Sonar-runner redis-64 }.each do |pack|
+  chocolatey pack
+  execute "install_#{pack}" do
+    command "#{node['windows_slave']['choco_path']}/choco install #{pack}"
+  end
+end
+
+# extra services tools
+%w{ redis-64 }.each do |pack|
   chocolatey pack
   execute "install_#{pack}" do
     command "#{node['windows_slave']['choco_path']}/choco install #{pack}"
