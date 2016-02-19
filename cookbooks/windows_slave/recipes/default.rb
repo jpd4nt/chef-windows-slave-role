@@ -9,7 +9,7 @@
 include_recipe 'powershell::powershell5'
 
 # C# build stuff
-%w{ VisualStudio2013Professional VS2013.2 webdeploy git git.commandline  }.each do |pack|
+%w{ microsoft-build-tools webdeploy git git.commandline install dotnet4.5.2 netfx-4.5.2-devpack }.each do |pack|
   chocolatey pack
   execute "install_#{pack}" do
     command "#{node['windows_slave']['choco_path']}/choco install #{pack}"
